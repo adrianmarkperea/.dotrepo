@@ -1,0 +1,23 @@
+[alias]
+	st = status
+	d = diff --color-words
+	dw = diff --word-doff
+	ci = commit -v
+	cia = commit -v -a
+	ca = commit -a -m
+	co = checkout
+	cp = cherry-pick
+	l = log
+	ll = log -p
+	lod = log --oneline --decorate
+	lgraph = log --oneline --decorate --graph
+	b = branch
+	pom = push origin master
+	pullit = pull --rebase
+	rem = remote add origin
+	unstash = stash branch
+[push]
+	default = simple
+[user]
+	email = adrianmarkperea@gmail.com
+	name = Adrian Perea
