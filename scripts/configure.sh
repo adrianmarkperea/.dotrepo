@@ -15,7 +15,7 @@ do
 	IFS='/' read -r -a paths <<< $config_file
 	name="${paths[-1]}"
 	
-	cp $config_file $HOME/$name
+	ln -sfv $config_file $HOME/$name
 done
 
 # Copy themes
