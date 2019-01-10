@@ -59,9 +59,9 @@ set expandtab
 
 " colors
 " set t_Co=256
-" set background=dark
-colorscheme iceberg
-let airline_theme='iceberg'
+set termguicolors
+set background=dark
+colorscheme hybrid
 
 " javascript
 autocmd FileType typescript JsPreTmpl html
@@ -75,6 +75,7 @@ nnoremap <C-l> <C-W>l
 nnoremap <C-o> :BufExplorer<CR>
 nnoremap <C-b> :NERDTree<CR>
 nnoremap <C-p> :FZF<CR>
+nnoremap <C-g> :Rg
 
 " turns off highlighting
 nnoremap <silent> <leader><CR> :noh<CR>
@@ -87,30 +88,47 @@ nnoremap <Leader>Q :bdelete<CR>
 nnoremap <Leader>h :split<CR>
 nnoremap <Leader>v :vsplit<CR>
 
+" all about tabs
+nnoremap <C-t>n :tabnew<CR>
+nnoremap <C-t>c :tabclose<CR>
+nnoremap <C-t>h :tabprevious<CR>
+nnoremap <C-t>l :tabnext<CR>
+nnoremap <C-t>d :tabclose<CR>
+
 " ----------------------------- PLUGIN CONFIGURATION
 
 call plug#begin('~/.vim/plugged')
 
+" Meta plugins
 Plug 'scrooloose/nerdtree'
 Plug 'vim-scripts/bufexplorer.zip'
-Plug 'moll/vim-bbye'
-Plug 'alvan/vim-closetag'
-Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install.sh --all'  }
 Plug 'junegunn/fzf.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'leafgarland/typescript-vim'
-Plug 'Quramy/vim-js-pretty-template'
-Plug 'Quramy/tsuquyomi'
-Plug 'Valloric/YouCompleteMe'
-Plug 'NLKNguyen/papercolor-theme'
-Plug 'fcpg/vim-farout'
-Plug 'nelsyeung/twig.vim'
-Plug 'hzchirs/vim-material'
-Plug 'dylanaraps/wal.vim'
-Plug 'cocopon/iceberg.vim'
-Plug 'pangloss/vim-javascript'
-Plug 'fortes/vim-escuro'
+Plug 'moll/vim-bbye'
+
+" Editor plugins
+Plug 'jiangmiao/auto-pairs' " I: { O: {}
+Plug 'tpope/vim-surround'
+
+" Javascript plugins
+Plug 'jelera/vim-javascript-syntax'
+
+" Aesthetic
+Plug 'w0ng/vim-hybrid'
+
+" Plug 'alvan/vim-closetag'
+" Plug 'leafgarland/typescript-vim'
+" Plug 'Quramy/vim-js-pretty-template'
+" Plug 'Quramy/tsuquyomi'
+" Plug 'Valloric/YouCompleteMe'
+" Plug 'fcpg/vim-farout'
+" Plug 'fortes/vim-escuro'
 
 call plug#end()
+
+" Airline configurations
+let g:airline_powerline_fonts=1
+let g:airline#extensions#tabline#enabled=1
+let g:airline_theme='deus'
