@@ -63,8 +63,11 @@ set termguicolors
 set background=dark
 colorscheme hybrid
 
-" javascript
-autocmd FileType typescript JsPreTmpl html
+" Makes the terminal background transluscent
+hi Normal guibg=NONE ctermbg=NONE
+
+" ----------------------------- CUSTOM COMMANDS
+command -range=% Copy :<line1>,<line2>w !tee | xsel -bi
 
 " ----------------------------- KEY MAPPINGS CONFIGURATION
 nnoremap <C-j> <C-W>j
@@ -95,6 +98,12 @@ nnoremap <C-t>h :tabprevious<CR>
 nnoremap <C-t>l :tabnext<CR>
 nnoremap <C-t>d :tabclose<CR>
 
+" selects all occurrences of currently highlighted word
+nnoremap <C-s> *N
+
+" Copy range to xsel
+vmap <C-c> :'<,'>Copy<CR><CR>
+
 " ----------------------------- PLUGIN CONFIGURATION
 
 call plug#begin('~/.vim/plugged')
@@ -111,20 +120,18 @@ Plug 'moll/vim-bbye'
 " Editor plugins
 Plug 'jiangmiao/auto-pairs' " I: { O: {}
 Plug 'tpope/vim-surround'
+Plug 'w0rp/ale'
 
 " Javascript plugins
+Plug 'leafgarland/typescript-vim'
 Plug 'jelera/vim-javascript-syntax'
 
 " Aesthetic
 Plug 'w0ng/vim-hybrid'
 
 " Plug 'alvan/vim-closetag'
-" Plug 'leafgarland/typescript-vim'
-" Plug 'Quramy/vim-js-pretty-template'
 " Plug 'Quramy/tsuquyomi'
 " Plug 'Valloric/YouCompleteMe'
-" Plug 'fcpg/vim-farout'
-" Plug 'fortes/vim-escuro'
 
 call plug#end()
 
@@ -132,3 +139,5 @@ call plug#end()
 let g:airline_powerline_fonts=1
 let g:airline#extensions#tabline#enabled=1
 let g:airline_theme='hybrid'
+
+" Vim js pretty template configurations
