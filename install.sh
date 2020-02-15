@@ -2,24 +2,35 @@
 
 export DOTFILES_DIR
 DOTFILES_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+CONFIG_DIR="$DOTFILES_DIR/config"
 
-# Make scripts available
-PATH="$DOTFILES_DIR/bin:$DOTFILES_DIR/scripts::$PATH"
+BAK_DIR="/home/$USER/.dotfile.bak"
 
-# Install stuff
-echo "Installing various tools"
-tools.sh
-echo "Configuring vim"
-vim.sh
-echo "Getting zsh and oh-my-zsh"
-zsh.sh
-echo "Enabling touch gestures"
-gestures.sh
-echo "Now installing nvm and node"
-node.sh
+if [ ! -d $BAK_DIR ]; then
+	echo "Creating backup directory in $BAK_DIR"
+	mkdir $BAK_DIR
+fi
 
-# Symlink configuration files
-echo "Linking configuration files"
-configure.sh
+declare -a config_files=()
+shopt -s dotglob
+for file in "$CONFIG_DIR/*"
+do
+	config_files+=($file)
+done
+shopt -u dotglob
 
-echo "Installation finished. Happy coding :)"
+for config_file in "${config_files[@]}"
+do
+	# Extract the canonical name of the file
+	IFS="/" read -r -a paths <<< $config_file
+	NAME="${paths[-1]}"
+
+	# If file exists in $HOME, copy it to $BAK_DIR
+	if [ -f $HOME/$NAME ]; then
+		cp $HOME/$NAME "$BAK_DIR/${NAME}.bak"
+	fi
+
+	ln -sfv $config_file $HOME/$NAME
+done
+
+echo "done!"
