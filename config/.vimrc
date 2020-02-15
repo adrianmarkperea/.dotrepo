@@ -40,8 +40,17 @@ set nobackup
 set nowb
 set noswapfile
 
-" ----------------------------- CUSTOM COMMANDS
-command -range=% Copy :<line1>,<line2>w !tee | xsel -bi
+" enable ruler
+set ruler
+
+" enable hidden buffers
+set hid
+
+" indentation configuration
+set tabstop=2
+set softtabstop=2
+set shiftwidth=2
+set expandtab
 
 " ----------------------------- KEY MAPPINGS CONFIGURATION
 nnoremap <C-j> <C-W>j
@@ -80,6 +89,13 @@ vmap <C-c> :'<,'>Copy<CR><CR>
 
 " ----------------------------- PLUGIN CONFIGURATION
 
+" Install if not yet installed...
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
 call plug#begin('~/.vim/plugged')
 
 " Meta plugins
@@ -91,67 +107,9 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'moll/vim-bbye'
 
-" Editor plugins
-Plug 'jiangmiao/auto-pairs' " I: { O: {}
-Plug 'tpope/vim-surround'
-Plug 'w0rp/ale'
-Plug 'mattn/emmet-vim'
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --tern-completer' }
-
-" HTML plugins
-Plug 'alvan/vim-closetag'
-
-" Javascript plugins
-Plug 'leafgarland/typescript-vim'
-Plug 'jelera/vim-javascript-syntax'
-
-" Elm plugins
-Plug 'ElmCast/elm-vim'
-
-" Aesthetic
-Plug 'w0ng/vim-hybrid'
-Plug 'chriskempson/base16-vim'
-
-" Plug 'Quramy/tsuquyomi'
-
 call plug#end()
 
 " Airline configurations
 let g:airline_powerline_fonts=1
 let g:airline#extensions#tabline#enabled=1
-let g:airline_theme='hybrid'
-
-" YCM Plugins
-" Start autocompletion after 4 chars
-let g:ycm_min_num_of_chars_for_completion = 4
-let g:ycm_min_num_identifier_candidate_chars = 4
-let g:ycm_enable_diagnostic_highlighting = 0
-" Don't show YCM's preview window [ I find it really annoying ]
-set completeopt-=preview
-let g:ycm_add_preview_to_completeopt = 0
-
-" ----------------------------- PERSONAL CONFIGURATION
-
-" enable ruler
-set ruler
-
-" highlight current line
-set cursorline
-
-" enable hidden buffers
-set hid
-
-" indentation configuration
-set tabstop=2
-set softtabstop=2
-set shiftwidth=2
-set expandtab
-
-" colors
-" set t_Co=256
-set termguicolors
-set background=dark
-colorscheme base16-default-dark
-
-" Makes the terminal background transluscent
-hi Normal guibg=NONE ctermbg=NONE
+let g:airline_theme='papercolor'
