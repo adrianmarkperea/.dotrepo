@@ -60,7 +60,8 @@ nnoremap <C-l> <C-W>l
 
 nnoremap <C-o> :BufExplorer<CR>
 nnoremap <C-b> :NERDTree<CR>
-nnoremap <C-p> :FZF!<CR>
+" nnoremap <C-p> :FZF!<CR>
+nnoremap <C-p> :GFiles<CR>
 nnoremap <C-g> :Rg!<CR>
 
 " turns off highlighting
@@ -107,9 +108,17 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'moll/vim-bbye'
 
+" Web Development
+Plug 'pangloss/vim-javascript'
+Plug 'larsbs/vimterial_dark'
+Plug 'mxw/vim-jsx'
+Plug 'othree/html5.vim'
+Plug 'JulesWang/css.vim'
+Plug 'genoma/vim-less'
+
 call plug#end()
 
 " Airline configurations
 let g:airline_powerline_fonts=1
 let g:airline#extensions#tabline#enabled=1
-let g:airline_theme='papercolor'
+let g:airline_theme='fruit_punch'
