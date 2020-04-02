@@ -8,7 +8,7 @@ set number
 " turn on wildmenu
 set wildmenu
 
-"" set map leader
+" set map leader
 let mapleader = ","
 
 " searching configuration
@@ -22,6 +22,10 @@ filetype on
 filetype plugin on
 filetype indent on
 
+"if has('autocmd')
+"  filetype plugin indent on
+"endif
+"
 " reload files changed outside of vim
 set autoread
 
@@ -51,6 +55,15 @@ set tabstop=2
 set softtabstop=2
 set shiftwidth=2
 set expandtab
+
+" Autocompletion
+""inoremap " ""<left>
+""inoremap ' ''<left>
+""inoremap ( ()<left>
+""inoremap [ []<left>
+""inoremap { {}<left>
+""inoremap {<CR> {<CR>}<ESC>O
+""inoremap {;<CR> {<CR>};<ESC>O
 
 " ----------------------------- KEY MAPPINGS CONFIGURATION
 nnoremap <C-j> <C-W>j
@@ -107,6 +120,10 @@ Plug 'junegunn/fzf.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'moll/vim-bbye'
+Plug 'dense-analysis/ale'
+" Note that YCM has a compiled component
+" Check https://github.com/ycm-core/YouCompleteMe#installation
+Plug 'ycm-core/YouCompleteMe' 
 
 " Web Development
 Plug 'pangloss/vim-javascript'
@@ -115,6 +132,9 @@ Plug 'mxw/vim-jsx'
 Plug 'othree/html5.vim'
 Plug 'JulesWang/css.vim'
 Plug 'genoma/vim-less'
+Plug 'alvan/vim-closetag'
+Plug 'jiangmiao/auto-pairs'
+Plug 'lepture/vim-jinja'
 
 call plug#end()
 
@@ -122,3 +142,13 @@ call plug#end()
 let g:airline_powerline_fonts=1
 let g:airline#extensions#tabline#enabled=1
 let g:airline_theme='fruit_punch'
+
+" Auto Pairs config
+let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.js'
+let g:closetag_xhtml_filenames = '*.xhtml,*.jsx,*.js'
+let g:closetag_filetypes = 'html,xhtml,phtml'
+let g:closetag_xhtml_filetypes = 'xhtml,jsx'
+let g:closetag_emptyTags_caseSensitive = 1
+let g:closetag_regions = {
+  \ 'typescript.tsx': 'jsxRegion,tsxRegion',
+  \ 'javascript.jsx': 'jsxRegion' }

@@ -1,5 +1,6 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$PATH:/usr/local/go/bin
 
 # Path to your oh-my-zsh installation.
 export ZSH="/home/adrian/.oh-my-zsh"
@@ -8,7 +9,7 @@ export ZSH="/home/adrian/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="avit"
+ZSH_THEME="theunraveler"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -96,14 +97,39 @@ export SSH_KEY_PATH="~/.ssh/rsa_id"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 # [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+# Show background
 (cat ~/.cache/wal/sequences &)
 
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 
+export LASTWORKDIR="$(cat ~/.cache/last-working-dir)"
+
 #===========================###
 # Functions
 #====================#
-function codeon {
+function workon {
+  echo $1 | tee ~/.cache/last-working-dir > /dev/null
+  export LASTWORKDIR="$(cat ~/.cache/last-working-dir)"
   cd ~/Code/$1
+}
+
+function work() {
+  cd ~/Code/$LASTWORKDIR
+}
+
+# Extend output to my second monitor
+# This is during the Japan days baby
+function extend() {
+  xrandr --output HDMI-1 --mode 1920x1080 --above eDP-1
+}
+
+# Prettify CSV output
+function pretty_csv {
+  column -t -s, -n "$@" | less -F -S -X -K
+}
+
+# Show external database definitions
+function show_external_dbs {
+  pretty_csv $HOME/Code/.refs/db.csv
 }
