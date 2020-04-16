@@ -65,6 +65,11 @@ set expandtab
 ""inoremap {<CR> {<CR>}<ESC>O
 ""inoremap {;<CR> {<CR>};<ESC>O
 
+" ----------------------------- CUSTOM COMMANDS
+" %:t -> reference to the currently opened filed (useful for compiling)
+
+command Explorer !explorer.exe .
+
 " ----------------------------- KEY MAPPINGS CONFIGURATION
 nnoremap <C-j> <C-W>j
 nnoremap <C-k> <C-W>k
@@ -99,7 +104,9 @@ nnoremap <C-t>d :tabclose<CR>
 nnoremap <C-s> *N
 
 " Copy range to xsel
-vmap <C-c> :'<,'>Copy<CR><CR>
+" vmap <C-c> :'<,'>Copy<CR><CR>
+
+nnoremap <Leader>e :Explorer<CR>
 
 " ----------------------------- PLUGIN CONFIGURATION
 
@@ -117,13 +124,14 @@ Plug 'scrooloose/nerdtree'
 Plug 'vim-scripts/bufexplorer.zip'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+" Plug 'vim-airline/vim-airline'
+" Plug 'vim-airline/vim-airline-themes'
 Plug 'moll/vim-bbye'
 Plug 'dense-analysis/ale'
 " Note that YCM has a compiled component
 " Check https://github.com/ycm-core/YouCompleteMe#installation
 Plug 'ycm-core/YouCompleteMe' 
+Plug 'sonph/onehalf', {'rtp': 'vim/'}
 
 " Web Development
 Plug 'pangloss/vim-javascript'
@@ -136,10 +144,38 @@ Plug 'alvan/vim-closetag'
 Plug 'jiangmiao/auto-pairs'
 Plug 'lepture/vim-jinja'
 
+" Vanity
+Plug 'morhetz/gruvbox'
+
 call plug#end()
 
+syntax on
+set t_Co=256
+set cursorline
+
+set background=dark
+colorscheme onehalfdark
+" let g:gruvbox_italic=1
+" colorscheme gruvbox
+
+
+hi Normal guibg=NONE ctermbg=NONE
+" hi NonText guibg=NONE ctermbg=NONE
+" hi Number guibg=NONE ctermbg=NONE
+" hi LineNr ctermfg=NONE ctermbg=NONE
+hi clear LineNr
+hi clear CursorLine
+hi CursorLine term=underline cterm=underline
+" hi clear SignColumn
+
+if exists('+termguicolors')
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+  set termguicolors
+endif
+
 " Airline configurations
-let g:airline_powerline_fonts=1
+let g:airline_powerline_fonts=0
 let g:airline#extensions#tabline#enabled=1
 let g:airline_theme='fruit_punch'
 
