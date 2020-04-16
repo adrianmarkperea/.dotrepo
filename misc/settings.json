@@ -1,0 +1,82 @@
+{
+    "workbench.colorTheme": "One Dark Pro",
+    "editor.fontSize": 16,
+    "editor.wordWrap": "on",
+    "vim.useSystemClipboard": true,
+    "vim.useCtrlKeys": true,
+    "vim.handleKeys": {
+        "<C-a>": false,
+        "<C-f>": false,
+        "<C-b>": true,
+        "<C-n>": false,
+    },
+    "vim.hlsearch": true,
+    "vim.leader": ",",
+    "vim.normalModeKeyBindingsNonRecursive": [
+        {
+            "before": ["<leader>", "<CR>"],
+            "commands": [":nohl"]
+        },
+        {
+            "before": ["<leader>", "h"],
+            "commands": [":split"]
+        },
+        {
+            "before": ["<leader>", "v"],
+            "commands": [":vsplit"]
+        },
+        {
+            "before": ["<C-h>"],
+            "after": ["<C-w>", "h"]
+        },
+        {
+            "before": ["<C-j>"],
+            "after": ["<C-w>", "j"]
+        },
+        {
+            "before": ["<C-k>"],
+            "after": ["<C-w>", "k"]
+        },
+        {
+            "before": ["<C-l>"],
+            "after": ["<C-w>", "l"]
+        },
+        {
+            "before": ["<C-b>"],
+            "commands": ["workbench.view.explorer"]
+        }
+    ],
+    "vim.visualModeKeyBindingsNonRecursive": [
+        {
+            "before": [
+                "p",
+            ],
+            "after": [
+                "p",
+                "g",
+                "v",
+                "y"
+            ]
+        },
+        {
+            "before": [
+                ">"
+            ],
+            "commands": [
+                "editor.action.indentLines"
+            ]
+        },
+        {
+            "after": [
+                "<"
+            ],
+            "commands": [
+                "editor.action.outdentLines"
+            ]
+        }
+    ],
+    "vim.searchHighlightColor": "#f5e042",
+    "editor.tabSize": 4,
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "window.zoomLevel": -1
+}
