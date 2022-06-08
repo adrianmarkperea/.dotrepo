@@ -9,7 +9,10 @@ set number
 set wildmenu
 
 " set map leader
-let mapleader = ","
+" let mapleader = ","
+" Hack to make space the leader
+map <SPACE> <leader>
+
 
 " searching configuration
 set ignorecase
@@ -75,6 +78,8 @@ nnoremap <C-j> <C-W>j
 nnoremap <C-k> <C-W>k
 nnoremap <C-h> <C-W>h
 nnoremap <C-l> <C-W>l
+nnoremap <Leader>s :w<CR>
+nnoremap <Leader>S :wa<CR>
 
 nnoremap <C-o> :BufExplorer<CR>
 nnoremap <C-b> :NERDTree<CR>
@@ -89,9 +94,10 @@ nnoremap <silent> <leader><CR> :noh<CR>
 nnoremap <Leader>q :Bdelete<CR>
 nnoremap <Leader>Q :bdelete<CR>
 
-" splits the current window
+" pane management
 nnoremap <Leader>h :split<CR>
 nnoremap <Leader>v :vsplit<CR>
+nnoremap <Leader>w :q<CR>
 
 " all about tabs
 nnoremap <C-t>n :tabnew<CR>
@@ -124,10 +130,11 @@ Plug 'scrooloose/nerdtree'
 Plug 'vim-scripts/bufexplorer.zip'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-" Plug 'vim-airline/vim-airline'
-" Plug 'vim-airline/vim-airline-themes'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'moll/vim-bbye'
 Plug 'dense-analysis/ale'
+Plug 'jremmen/vim-ripgrep'
 " Note that YCM has a compiled component
 " Check https://github.com/ycm-core/YouCompleteMe#installation
 Plug 'ycm-core/YouCompleteMe' 
@@ -155,18 +162,11 @@ set cursorline
 
 set background=dark
 colorscheme onehalfdark
-" let g:gruvbox_italic=1
-" colorscheme gruvbox
-
 
 hi Normal guibg=NONE ctermbg=NONE
-" hi NonText guibg=NONE ctermbg=NONE
-" hi Number guibg=NONE ctermbg=NONE
-" hi LineNr ctermfg=NONE ctermbg=NONE
 hi clear LineNr
 hi clear CursorLine
 hi CursorLine term=underline cterm=underline
-" hi clear SignColumn
 
 if exists('+termguicolors')
 let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
